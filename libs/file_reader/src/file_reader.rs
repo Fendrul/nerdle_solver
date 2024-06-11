@@ -14,7 +14,7 @@ impl FileReader {
 
         let file = match File::open(path_to_file) {
             Ok(file) => file,
-            Err(error) => panic!("Problem opening the file: {:?}", error),
+            Err(error) => panic!("Problem opening the file: {error:?}"),
         };
 
         let buf_reader = BufReader::new(file.try_clone().unwrap());
@@ -26,9 +26,8 @@ impl FileReader {
         let mut line = String::new();
 
         match self.reader.read_line(&mut line) {
-            Ok(0) => None,
+            Ok(0) | Err(_) => None,
             Ok(_) => Some(line),
-            Err(_) => None,
         }
     }
 }
@@ -58,9 +57,9 @@ fn get_path_to_project() -> PathBuf {
             std::path::Component::Normal(os_str) => {
                 if os_str == "src" {
                     break;
-                } else {
-                    new_path.push(os_str);
                 }
+
+                new_path.push(os_str);
             }
 
             _ => {}
