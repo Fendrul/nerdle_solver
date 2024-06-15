@@ -27,6 +27,8 @@ impl FileReader {
 
         let file = File::open(path_to_file)?;
 
+        Box::leak(Box::new(file.try_clone()?));
+
         let buf_reader = BufReader::new(file.try_clone()?);
 
         Ok(FileReader { reader: buf_reader })

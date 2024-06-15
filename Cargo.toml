@@ -5,3 +5,4 @@ edition = "2021"
 
 [dependencies]
 file_reader = { path = "libs/file_reader"}
+arena = { path  = "libs/arena"}
