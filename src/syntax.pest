@@ -1,0 +1,28 @@
+WHITESPACE = _{ " " | "\t" }
+
+// Entry point.
+equation = _{ SOI ~ addExpr ~ equalWrap ~ numberWrap+ ~ EOI }
+
+// Tokens.
+number = @{ ASCII_DIGIT }
+
+add   = { "+" }
+sub   = { "-" }
+mult  = { "*" }
+div   = { "/" }
+equal = { "=" }
+
+correctness = _{ correct | incorrect | wrongPlaced }
+    correct     =  { ^"c" }
+    incorrect   =  { ^"i" }
+    wrongPlaced =  { ^"w" }
+
+// Wrappers
+numberWrap = { number ~ correctness }
+addOpWrap  = { (add | sub) ~ correctness }
+multOpWrap = { (mult | div) ~ correctness }
+equalWrap  = { equal ~ correctness }
+
+// Expressions
+addExpr  = { term ~ (addOpWrap ~ term)* }
+term = { numberWrap ~ (multOpWrap ~ numberWrap)* }
