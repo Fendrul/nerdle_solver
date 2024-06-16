@@ -21,7 +21,7 @@ impl FileReader {
     /// # Errors
     ///
     /// This function will return an error if the file cannot be opened.
-    pub fn new(path_to_file_string: String) -> Result<FileReader, std::io::Error> {
+    pub fn new(path_to_file_string: &str) -> Result<FileReader, std::io::Error> {
         let path_to_project: PathBuf = get_path_to_project();
         let path_to_file = path_to_project.join(path_to_file_string);
 

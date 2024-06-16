@@ -1,7 +1,7 @@
 use arena::arena::Arena;
 use crate::core::expressions::Expression;
 mod core;
-mod tokenizer;
+mod parser;
 
 fn main() {
     println!("Hello, world!");

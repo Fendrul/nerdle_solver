@@ -11,6 +11,7 @@ pub struct Arena<T> {
 }
 
 
+
 impl<T> Arena<T> {
     /// Creates a new, empty `Arena`.
     ///
@@ -82,6 +83,18 @@ impl<T: Display> Display for Arena<T> {
             write!(f, "{}", node.borrow().value)?;
         }
         write!(f, "]")
+    }
+}
+
+impl<T: PartialEq> PartialEq for Arena<T> {
+    fn eq(&self, other: &Self) -> bool {
+        for (first_node, second_node) in self.nodes.iter().zip(other.nodes.iter()) {
+            if first_node.borrow().value != second_node.borrow().value {
+                return false;
+            }
+        }
+        
+        true
     }
 }
 
