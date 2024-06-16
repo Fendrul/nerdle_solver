@@ -1,7 +1,8 @@
 WHITESPACE = _{ " " | "\t" }
 
 // Entry point.
-equation = _{ SOI ~ addExpr ~ equalWrap ~ numberWrap+ ~ EOI }
+data = _{ SOI ~ equation ~ ("\n" ~ equation)* ~ EOI }
+equation = { addExpr ~ equalWrap ~ numberWrap+ }
 
 // Tokens.
 number = @{ ASCII_DIGIT }
@@ -25,4 +26,4 @@ equalWrap  = { equal ~ correctness }
 
 // Expressions
 addExpr  = { term ~ (addOpWrap ~ term)* }
-term = { numberWrap ~ (multOpWrap ~ numberWrap)* }
+term = { numberWrap+ ~ (multOpWrap ~ numberWrap)* }
