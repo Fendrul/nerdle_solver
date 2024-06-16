@@ -3,7 +3,7 @@ use std::fmt::Display;
 use std::rc::Rc;
 
 /// A type alias for a reference-counted, mutable `Node`.
-type NodeRef<T> = Rc<RefCell<Node<T>>>;
+pub type NodeRef<T> = Rc<RefCell<Node<T>>>;
 
 /// A struct representing a collection of nodes.
 pub struct Arena<T> {

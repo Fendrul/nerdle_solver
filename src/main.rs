@@ -7,7 +7,6 @@ fn main() {
     println!("Hello, world!");
 
     let mut _test = Expression::Value;
-    _test = Expression::Operation;
 
     let mut arena = Arena::new();
     
