@@ -47,6 +47,19 @@ impl FileReader {
             Ok(_) => Some(line),
         }
     }
+    
+    pub fn read_file(path: &str) -> Result<String, std::io::Error> {
+        let path_to_project: PathBuf = get_path_to_project();
+        let path_to_file = path_to_project.join(path);
+
+        let file = File::open(path_to_file)?;
+        let mut buf_reader = BufReader::new(file);
+
+        let mut contents = String::new();
+        buf_reader.read_to_string(&mut contents)?;
+
+        Ok(contents)
+    }
 }
 
 impl Iterator for FileReader {
